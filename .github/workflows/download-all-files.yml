@@ -1,0 +1,33 @@
+name: Download All Files
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  bundle-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create full project archive
+        run: |
+          mkdir -p dist
+          zip -r dist/Angle-smp-plugin-${{ github.sha }}.zip . \
+            -x ".git/*" \
+            -x "dist/*"
+
+      - name: Upload archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Angle-smp-plugin-${{ github.sha }}
+          path: dist/Angle-smp-plugin-${{ github.sha }}.zip
+          if-no-files-found: error
+          retention-days: 30
