@@ -20,18 +20,44 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build repository manifest
+        run: |
+          echo "Commit: $GITHUB_SHA"
+          echo "File count:" $(find . -type f | wc -l)
+          du -sh .
 
       - name: Create full project archive
         run: |
           mkdir -p dist
-          zip -r dist/Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}.zip . \
+          zip -r dist/Angle-smp-plugin-${{ github.sha }}.zip . \
             -x ".git/*" \
             -x "dist/*"
+          ls -lh dist
 
-      - name: Upload archive artifact
+      - name: Upload ZIP artifact (versioned)
         uses: actions/upload-artifact@v4
         with:
-          name: Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}
-          path: dist/Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}.zip
+          name: Angle-smp-plugin-${{ github.sha }}
+          path: dist/Angle-smp-plugin-${{ github.sha }}.zip
           if-no-files-found: error
           retention-days: 30
+          overwrite: true
+
+      - name: Upload raw repository artifact (latest)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Angle-smp-plugin-latest
+          path: |
+            pom.xml
+            src/**
+            .github/workflows/**
+            README.md
+            LICENSE
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+          compression-level: 0
+          include-hidden-files: true
