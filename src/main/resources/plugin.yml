@@ -1,0 +1,26 @@
+name: AngelGuardians
+version: 1.0.0
+main: com.angle.smp.angel.AngelPlugin
+api-version: '1.21'
+authors: [Angle]
+description: RPG elemental guardian angel system for SMP
+commands:
+  angel:
+    description: Main player command for angel powers
+    usage: /angel
+    permission: angel.use
+  angeladmin:
+    description: Admin command for angel management
+    usage: /angeladmin
+    permission: angel.admin
+permissions:
+  angel.use:
+    default: true
+  angel.choose:
+    default: op
+  angel.admin:
+    default: op
+  angel.set:
+    default: op
+  angel.reload:
+    default: op

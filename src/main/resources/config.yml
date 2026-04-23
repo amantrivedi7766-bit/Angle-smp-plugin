@@ -1,0 +1,71 @@
+first-join:
+  random-element: false
+
+xp:
+  mob-kill: 10
+  player-kill: 30
+  level-scale: 65.0
+
+features:
+  scoreboard: true
+  bossbar: true
+  actionbar-cooldown: true
+
+performance:
+  passive-tick-interval: 20
+  hud-tick-interval: 20
+  autosave-seconds: 120
+
+debug: false
+
+gui:
+  main-title: "Guardian Angel"
+  choose-title: "Choose Your Element"
+
+particles:
+  intensity: 1.0
+
+sounds:
+  enabled: true
+
+elements:
+  fire:
+    fire-blast:
+      damage: 6.0
+      cooldown: 5
+    flame-aura:
+      damage: 1.0
+    fire-dash:
+      damage: 4.0
+      cooldown: 10
+  ice:
+    ice-spike:
+      damage: 5.0
+      cooldown: 6
+    freeze:
+      damage: 3.0
+      cooldown: 10
+  lightning:
+    lightning-strike:
+      damage: 7.0
+      cooldown: 8
+    speed-boost:
+      cooldown: 14
+  wind:
+    wind-push:
+      damage: 4.0
+      cooldown: 5
+    double-jump:
+      cooldown: 3
+  earth:
+    earth-wall:
+      cooldown: 12
+    stomp:
+      damage: 6.0
+      cooldown: 10
+  light:
+    heal:
+      cooldown: 9
+    flash:
+      damage: 2.0
+      cooldown: 10
