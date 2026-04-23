@@ -6,6 +6,10 @@ on:
     branches:
       - main
       - master
+  pull_request:
+    branches:
+      - main
+      - master
 
 jobs:
   bundle-and-upload:
@@ -20,14 +24,14 @@ jobs:
       - name: Create full project archive
         run: |
           mkdir -p dist
-          zip -r dist/Angle-smp-plugin-${{ github.sha }}.zip . \
+          zip -r dist/Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}.zip . \
             -x ".git/*" \
             -x "dist/*"
 
       - name: Upload archive artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Angle-smp-plugin-${{ github.sha }}
-          path: dist/Angle-smp-plugin-${{ github.sha }}.zip
+          name: Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist/Angle-smp-plugin-${{ github.run_id }}-${{ github.run_attempt }}.zip
           if-no-files-found: error
           retention-days: 30
